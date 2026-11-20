@@ -1,0 +1,105 @@
+{
+  "schema": "astra-hybrid-v25-validation/v1",
+  "base_release": "ASTRA-MASTER-COMPLETE-SWAR-DEEP-LEARNING-v24",
+  "new_tests": 12,
+  "full_suite_tests": 194,
+  "full_suite_result": "passed",
+  "compileall": "passed",
+  "cloud_deployed": false,
+  "cloud_tts_render_tested": false,
+  "external_api_fetch_performed": false,
+  "model_weights_downloaded_or_trained": false,
+  "build_environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "runtime_probe": {
+    "VAJRA": {
+      "engine": "VAJRA",
+      "base_engine": "EDGE",
+      "requested_mode": "auto",
+      "selected_mode": null,
+      "provider": null,
+      "ready": false,
+      "fallback_available": [],
+      "checks": {
+        "local": {
+          "ready": false,
+          "detail": "Pinned Hindi model weights not found; set ASTRA_INDIC_TINY_TTS_MODEL_DIR after reviewing and installing the model"
+        },
+        "online": {
+          "ready": false,
+          "detail": "Install edge-tts; online connectivity will still need a live check"
+        }
+      },
+      "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+    },
+    "AGNI": {
+      "engine": "AGNI",
+      "base_engine": "PIPER",
+      "requested_mode": "auto",
+      "selected_mode": null,
+      "provider": null,
+      "ready": false,
+      "fallback_available": [],
+      "checks": {
+        "local": {
+          "ready": false,
+          "detail": "Piper binary missing"
+        },
+        "online": {
+          "ready": false,
+          "detail": "Missing configuration: ASTRA_CLOUD_URL, ASTRA_CLOUD_TOKEN"
+        }
+      },
+      "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+    },
+    "VAYU": {
+      "engine": "VAYU",
+      "base_engine": "ESPEAK",
+      "requested_mode": "auto",
+      "selected_mode": null,
+      "provider": null,
+      "ready": false,
+      "fallback_available": [],
+      "checks": {
+        "local": {
+          "ready": false,
+          "detail": "espeak-ng missing"
+        },
+        "online": {
+          "ready": false,
+          "detail": "Missing configuration: ASTRA_CLOUD_URL, ASTRA_CLOUD_TOKEN"
+        }
+      },
+      "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+    },
+    "ASTRA": {
+      "engine": "ASTRA",
+      "base_engine": "ELEVENLABS",
+      "requested_mode": "auto",
+      "selected_mode": null,
+      "provider": null,
+      "ready": false,
+      "fallback_available": [],
+      "checks": {
+        "local": {
+          "ready": false,
+          "detail": "No validated local ASTRA/ElevenLabs-compatible voice model is installed yet"
+        },
+        "online": {
+          "ready": false,
+          "detail": "Missing configuration: ELEVENLABS_API_KEY"
+        }
+      },
+      "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+    }
+  },
+  "notes": [
+    "Cloud worker code is implemented but not deployed to a user-owned VPS/domain.",
+    "AGNI/PIPER and VAYU/ESPEAK cloud TTS require installed binaries and voice model on that server.",
+    "VAJRA/EDGE local requires pinned Hindi local model weights; ASTRA/ELEVENLABS local requires a separate licensed/consented local model.",
+    "API/browser/agent evidence enters pending_review; no automatic training or code mutation occurs.",
+    "The build environment has no configured Piper/eSpeak binaries, personal cloud credentials, or local Hindi model weights; no live TTS/cloud test is claimed."
+  ]
+}

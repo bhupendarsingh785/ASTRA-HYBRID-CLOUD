@@ -1,0 +1,24 @@
+{
+  "release": "ASTRA-HYBRID-v26",
+  "status": "code_and_mocked_tests_passed",
+  "runtime_execution": "not_live_verified",
+  "cloud_deployment": "template_only_not_deployed",
+  "training": "not_started",
+  "security": {
+    "explicit_cloud_text_consent": true,
+    "minimum_cloud_token_length": 32,
+    "loopback_default_bind": true,
+    "api_https_allowlist": true,
+    "api_redirects_disabled": true,
+    "api_response_size_limit": true,
+    "dns_public_ip_precheck": true,
+    "dns_rebinding_complete_protection": false,
+    "production_egress_firewall_required": true
+  },
+  "engines": {
+    "VAJRA": "local Indic Tiny TTS adapter and online Edge TTS runtime implemented; dependencies/weights absent here",
+    "AGNI": "local Piper 1.8 and personal-cloud Piper runtime implemented; Hindi voice model absent here",
+    "VAYU": "local and personal-cloud eSpeak NG runtime implemented; binary absent here",
+    "ASTRA": "local operator adapter and online ElevenLabs API runtime implemented; adapter/credentials absent here"
+  }
+}

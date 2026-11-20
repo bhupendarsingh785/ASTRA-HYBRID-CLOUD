@@ -1,0 +1,82 @@
+{
+  "VAJRA": {
+    "engine": "VAJRA",
+    "base_engine": "EDGE",
+    "requested_mode": "auto",
+    "selected_mode": null,
+    "provider": null,
+    "ready": false,
+    "fallback_available": [],
+    "checks": {
+      "local": {
+        "ready": false,
+        "detail": "Pinned Hindi model weights not found; set ASTRA_INDIC_TINY_TTS_MODEL_DIR after reviewing and installing the model"
+      },
+      "online": {
+        "ready": false,
+        "detail": "Install edge-tts; online connectivity will still need a live check"
+      }
+    },
+    "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+  },
+  "AGNI": {
+    "engine": "AGNI",
+    "base_engine": "PIPER",
+    "requested_mode": "auto",
+    "selected_mode": null,
+    "provider": null,
+    "ready": false,
+    "fallback_available": [],
+    "checks": {
+      "local": {
+        "ready": false,
+        "detail": "Piper binary missing"
+      },
+      "online": {
+        "ready": false,
+        "detail": "Missing configuration: ASTRA_CLOUD_URL, ASTRA_CLOUD_TOKEN"
+      }
+    },
+    "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+  },
+  "VAYU": {
+    "engine": "VAYU",
+    "base_engine": "ESPEAK",
+    "requested_mode": "auto",
+    "selected_mode": null,
+    "provider": null,
+    "ready": false,
+    "fallback_available": [],
+    "checks": {
+      "local": {
+        "ready": false,
+        "detail": "espeak-ng missing"
+      },
+      "online": {
+        "ready": false,
+        "detail": "Missing configuration: ASTRA_CLOUD_URL, ASTRA_CLOUD_TOKEN"
+      }
+    },
+    "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+  },
+  "ASTRA": {
+    "engine": "ASTRA",
+    "base_engine": "ELEVENLABS",
+    "requested_mode": "auto",
+    "selected_mode": null,
+    "provider": null,
+    "ready": false,
+    "fallback_available": [],
+    "checks": {
+      "local": {
+        "ready": false,
+        "detail": "No validated local ASTRA/ElevenLabs-compatible voice model is installed yet"
+      },
+      "online": {
+        "ready": false,
+        "detail": "Missing configuration: ELEVENLABS_API_KEY"
+      }
+    },
+    "important": "A local provider is an independent voice backend, not a copy of a proprietary online voice."
+  }
+}

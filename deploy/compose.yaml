@@ -1,0 +1,67 @@
+services:
+  astra-hybrid:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ASTRA_CLOUD_HOST: 0.0.0.0
+      ASTRA_CLOUD_PORT: 8765
+      ASTRA_CLOUD_ALLOW_PUBLIC_BIND: "1"
+      ASTRA_KNOWLEDGE_DB: /data/knowledge_hub.sqlite3
+      PIPER_MODEL_PATH: /models/hindi.onnx
+      PYTHON: /usr/local/bin/python
+    expose:
+      - "8765"
+    volumes:
+      - astra_data:/data
+      - ../models:/models:ro
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - astra-private
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/health', timeout=3).read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      astra-hybrid:
+        condition: service_healthy
+    networks:
+      - astra-private
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  astra-private:
+    driver: bridge
+
+volumes:
+  astra_data:
+  caddy_data:
+  caddy_config:

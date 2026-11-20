@@ -1,0 +1,23 @@
+{
+  "schema": "astra-api-sources/v1",
+  "sources": [
+    {
+      "id": "example_public_docs",
+      "enabled": false,
+      "kind": "rest_json_get",
+      "base_url": "https://api.example.org/v1/",
+      "allowed_hosts": ["api.example.org"],
+      "path": "public-docs?topic=hindi-tts",
+      "auth_env": null,
+      "auth_header": null,
+      "max_bytes": 500000,
+      "purpose": "Example only; replace with an API whose terms permit this use."
+    }
+  ],
+  "security": {
+    "https_only": true,
+    "host_allowlist_required": true,
+    "secrets_from_environment_only": true,
+    "all_records_start_pending_review": true
+  }
+}

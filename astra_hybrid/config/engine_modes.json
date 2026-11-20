@@ -1,0 +1,95 @@
+{
+  "schema": "astra-hybrid-engine-modes/v2",
+  "principles": {
+    "local_first_default": true,
+    "cloud_requires_explicit_configuration": true,
+    "fallback_on_error": true,
+    "never_upload_raw_voice_data_without_consent": true,
+    "never_auto_train_or_mutate_code_from_research": true,
+    "cloud_text_requires_explicit_consent": true,
+    "knowledge_requires_review_before_training": true
+  },
+  "engines": {
+    "VAJRA": {
+      "base_engine": "EDGE",
+      "online": {
+        "provider": "edge_tts",
+        "requires_env": [],
+        "network": true
+      },
+      "local": {
+        "provider": "indic_tiny_tts",
+        "requires_model_download": true,
+        "model": "sulabhkatiyar/indic-tiny-tts-hindi",
+        "limitations": "Independent local Hindi model; not an offline copy of Microsoft EDGE voices."
+      },
+      "fallback_order": [
+        "local",
+        "online"
+      ]
+    },
+    "AGNI": {
+      "base_engine": "PIPER",
+      "online": {
+        "provider": "astra_personal_cloud",
+        "requires_env": [
+          "ASTRA_CLOUD_URL",
+          "ASTRA_CLOUD_TOKEN"
+        ],
+        "network": true
+      },
+      "local": {
+        "provider": "piper",
+        "requires_model_download": true,
+        "model": "user-installed Piper Hindi voice",
+        "limitations": "Runs locally after the Piper binary and voice model are installed."
+      },
+      "fallback_order": [
+        "local",
+        "online"
+      ]
+    },
+    "VAYU": {
+      "base_engine": "ESPEAK",
+      "online": {
+        "provider": "astra_personal_cloud",
+        "requires_env": [
+          "ASTRA_CLOUD_URL",
+          "ASTRA_CLOUD_TOKEN"
+        ],
+        "network": true
+      },
+      "local": {
+        "provider": "espeak_ng",
+        "requires_model_download": false,
+        "model": "system espeak-ng Hindi voice",
+        "limitations": "Offline fallback; naturalness is lower than neural TTS."
+      },
+      "fallback_order": [
+        "local",
+        "online"
+      ]
+    },
+    "ASTRA": {
+      "base_engine": "ELEVENLABS",
+      "online": {
+        "provider": "elevenlabs_api",
+        "requires_env": [
+          "ELEVENLABS_API_KEY",
+          "ELEVENLABS_VOICE_ID"
+        ],
+        "network": true
+      },
+      "local": {
+        "provider": "personal_local_adapter",
+        "requires_model_download": true,
+        "model": "operator-configured local Hindi TTS adapter command",
+        "limitations": "Requires ASTRA_LOCAL_TTS_COMMAND JSON argv with {text_file} and {output_file}; adapter must be independently tested."
+      },
+      "fallback_order": [
+        "local",
+        "online"
+      ]
+    }
+  }
+}

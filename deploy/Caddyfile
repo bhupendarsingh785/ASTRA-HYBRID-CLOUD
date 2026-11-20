@@ -1,0 +1,4 @@
+{$ASTRA_DOMAIN} {
+    encode zstd gzip
+    reverse_proxy astra-hybrid:8765
+}

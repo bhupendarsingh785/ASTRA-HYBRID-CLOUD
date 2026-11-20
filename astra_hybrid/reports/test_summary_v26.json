@@ -1,0 +1,20 @@
+{
+  "release": "ASTRA-HYBRID-v26",
+  "test_command": "PYTHONPATH=. pytest -q",
+  "tests_passed": 31,
+  "tests_failed": 0,
+  "compileall": "passed",
+  "cli_help": "passed",
+  "config_json_validation": "passed",
+  "live_provider_calls": 0,
+  "live_cloud_deployment": false,
+  "model_training": false,
+  "notes": [
+    "Tests use mocks/fakes for provider/network paths; they verify routing, consent gates, API safety checks, knowledge review/retrieval and quality feedback.",
+    "No real voice model was downloaded or run in this build environment.",
+    "No VPS/domain credentials were supplied, so Docker deployment template was not deployed.",
+    "Piper local execution uses maintained piper-tts 1.8 CLI contract and requires an ONNX model plus matching .onnx.json config."
+  ],
+  "docker_compose_yaml": "parsed successfully",
+  "docker_image_build": "not run (Docker CLI unavailable in build environment)"
+}

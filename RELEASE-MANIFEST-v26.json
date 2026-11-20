@@ -1,0 +1,17 @@
+{
+  "release": "ASTRA-HYBRID-v26",
+  "release_type": "hybrid-subsystem-update-only",
+  "base_release": "ASTRA-HYBRID-v25.zip",
+  "includes_full_astra_master": false,
+  "requires_master_swar_v24_for_vajra_local": true,
+  "tests_passed": 31,
+  "tests_failed": 0,
+  "model_training_performed": false,
+  "live_cloud_deployment_performed": false,
+  "live_provider_calls_performed": false,
+  "notes": [
+    "This ZIP contains the Hybrid Local/Cloud subsystem only, not the complete ASTRA project.",
+    "Overlay this release on the ASTRA project root that already has the v25 hybrid subsystem and SWAR v24.",
+    "VPS deployment files are templates; credentials, domain, and licensed voice models must be supplied by the operator."
+  ]
+}
