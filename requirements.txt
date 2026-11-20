@@ -1,0 +1,2 @@
+# ASTRA Hybrid v26 — runtime stdlib par chalta hai, sirf test runner chahiye.
+pytest>=8
