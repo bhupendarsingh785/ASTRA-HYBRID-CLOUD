@@ -1,0 +1,62 @@
+name: ASTRA Hybrid CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# Read-only CI: cannot modify branches, deploy services, or access secrets.
+permissions:
+  contents: read
+
+# Do not cancel another agent's run or block its work.
+concurrency:
+  group: astra-hybrid-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Tests and safety checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install test runner
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Compile Python sources
+        run: python -m compileall -q astra_hybrid tests
+
+      - name: Validate JSON configuration and reports
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          files = sorted(Path("astra_hybrid").rglob("*.json"))
+          files += sorted(Path(".").glob("RELEASE-MANIFEST-*.json"))
+          for path in files:
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"OK: {path}")
+          if not files:
+              raise SystemExit("No JSON files found")
+          PY
+
+      - name: Run ASTRA Hybrid tests
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -q tests/test_astra_hybrid.py tests/test_astra_hybrid_v26.py
+
+      - name: Check deployment templates are present
+        run: |
+          test -s deploy/Dockerfile
+          test -s deploy/compose.yaml
+          test -s deploy/.env.example
